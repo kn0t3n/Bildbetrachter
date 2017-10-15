@@ -54,7 +54,7 @@ public class Bildbetrachter extends JFrame {
             jRadioButtons[i] = new JRadioButton("Bild " + (i + 1));
             jPanelWest.add(jRadioButtons[i]);
             buttonGroup.add(jRadioButtons[i]);
-            icon[i] = new ImageIcon("D:\\Schweiger\\Programmieren\\IdeaProjects\\Bildbetrachter\\src\\com\\sabel\\bilder\\Bild" + (i + 1) + ".jpg");
+            icon[i] = new ImageIcon("src/com/sabel/bilder/Bild" + (i + 1) + ".jpg");
         }
 
         jLabel = new JLabel(icon[0]);
