@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Bildbetrachter extends JFrame {
 
@@ -14,28 +16,44 @@ public class Bildbetrachter extends JFrame {
     private ButtonGroup buttonGroup;
     private JLabel jLabel;
     private JScrollPane jScrollPane;
+    private EventHandling eh;
 
     public Bildbetrachter() throws HeadlessException {
 
         this.setTitle("Bilder");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setSize(400, 400);
 
         this.initComponents();
         this.initEvents();
 
+        eh = new EventHandling(this);
         this.setVisible(true);
     }
 
     private void initEvents() {
-        for (int i = 0; i < 4; i++) {
-            jRadioButtons[i].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
 
-                }
-            });
-        }
+    }
+
+
+    private void backgroundBild4() {
+        jLabel.setIcon(icon[3]);
+        jRadioButtons[3].setSelected(true);
+    }
+
+    private void backgroundBild3() {
+        jLabel.setIcon(icon[2]);
+        jRadioButtons[2].setSelected(true);
+    }
+
+    private void backgroundBild2() {
+        jLabel.setIcon(icon[1]);
+        jRadioButtons[1].setSelected(true);
+    }
+
+    private void backgroundBild1() {
+        jLabel.setIcon(icon[0]);
+        jRadioButtons[0].setSelected(true);
     }
 
 
@@ -57,7 +75,10 @@ public class Bildbetrachter extends JFrame {
             icon[i] = new ImageIcon("src/com/sabel/bilder/Bild" + (i + 1) + ".jpg");
         }
 
-        jLabel = new JLabel(icon[0]);
+        jLabel = new JLabel();
+
+        backgroundBild1();
+
         jScrollPane = new JScrollPane(jLabel);
 
         jPanelWest.setLayout(new BoxLayout(jPanelWest, BoxLayout.Y_AXIS));
@@ -78,6 +99,102 @@ public class Bildbetrachter extends JFrame {
 
     public static void main(String[] args) {
         Bildbetrachter b = new Bildbetrachter();
+    }
+
+    private class EventHandling {
+
+        Bildbetrachter bb;
+
+        public EventHandling(Bildbetrachter bb) {
+            this.bb = bb;
+            initEvents();
+        }
+
+        private int getSelectedButton() {
+            int selected = -1;
+            for (int i = 0; i < jRadioButtons.length; i++) {
+                if (jRadioButtons[i].isSelected()) {
+                    selected = i;
+                }
+            }
+            return selected;
+        }
+
+        private void initEvents() {
+            jRadioButtons[0].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    backgroundBild1();
+                }
+            });
+            jRadioButtons[1].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    backgroundBild2();
+                }
+            });
+            jRadioButtons[2].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    backgroundBild3();
+                }
+            });
+            jRadioButtons[3].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    backgroundBild4();
+                }
+            });
+            jButtonNext.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    switch (getSelectedButton()) {
+                        case 0:
+                            backgroundBild2();
+                            break;
+                        case 1:
+                            backgroundBild3();
+                            break;
+                        case 2:
+                            backgroundBild4();
+                            break;
+                        case 3:
+                            backgroundBild1();
+                            break;
+                    }
+                }
+            });
+            jButtonPrevious.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    switch (getSelectedButton()) {
+                        case 0:
+                            backgroundBild4();
+                            break;
+                        case 1:
+                            backgroundBild1();
+                            break;
+                        case 2:
+                            backgroundBild2();
+                            break;
+                        case 3:
+                            backgroundBild3();
+                            break;
+                    }
+                }
+            });
+            bb.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    if (JOptionPane.showConfirmDialog(bb,
+                            "Wollen Sie das Programm wirklich beenden?", "Programm beenden?",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                        System.exit(0);
+                    }
+                }
+            });
+        }
     }
 
 
