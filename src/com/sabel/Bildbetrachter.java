@@ -25,17 +25,13 @@ public class Bildbetrachter extends JFrame {
         this.setSize(400, 400);
 
         this.initComponents();
-        this.initEvents();
 
         eh = new EventHandling(this);
         this.setVisible(true);
     }
 
-    private void initEvents() {
 
-    }
-
-
+    //change background images + selected RadioButtons
     private void backgroundBild4() {
         jLabel.setIcon(icon[3]);
         jRadioButtons[3].setSelected(true);
@@ -58,16 +54,16 @@ public class Bildbetrachter extends JFrame {
 
 
     private void initComponents() {
+
         jPanelSouth = new JPanel();
         jPanelWest = new JPanel();
-        jPanelCenter = new JPanel();
+        jLabel = new JLabel();
 
         buttonGroup = new ButtonGroup();
 
         icon = new Icon[4];
-
-
         jRadioButtons = new JRadioButton[4];
+
         for (int i = 0; i < 4; i++) {
             jRadioButtons[i] = new JRadioButton("Bild " + (i + 1));
             jPanelWest.add(jRadioButtons[i]);
@@ -75,7 +71,6 @@ public class Bildbetrachter extends JFrame {
             icon[i] = new ImageIcon("src/com/sabel/bilder/Bild" + (i + 1) + ".jpg");
         }
 
-        jLabel = new JLabel();
 
         backgroundBild1();
 
