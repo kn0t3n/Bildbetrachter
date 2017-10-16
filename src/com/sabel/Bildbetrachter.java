@@ -69,6 +69,7 @@ public class Bildbetrachter extends JFrame {
             jPanelWest.add(jRadioButtons[i]);
             buttonGroup.add(jRadioButtons[i]);
             icon[i] = new ImageIcon("src/com/sabel/bilder/Bild" + (i + 1) + ".jpg");
+            jRadioButtons[i].addActionListener(new EventHandling(this));
         }
 
 
@@ -80,6 +81,8 @@ public class Bildbetrachter extends JFrame {
 
         jButtonPrevious = new JButton("Vorheriges Bild");
         jButtonNext = new JButton("Nächstes Bild");
+        jButtonPrevious.addActionListener(new EventHandling(this));
+        jButtonNext.addActionListener(new EventHandling(this));
 
         jPanelSouth.add(jButtonPrevious);
         jPanelSouth.add(jButtonNext);
@@ -96,7 +99,7 @@ public class Bildbetrachter extends JFrame {
         Bildbetrachter b = new Bildbetrachter();
     }
 
-    private class EventHandling {
+    private class EventHandling implements ActionListener {
 
         Bildbetrachter bb;
 
@@ -116,68 +119,68 @@ public class Bildbetrachter extends JFrame {
         }
 
         private void initEvents() {
-            jRadioButtons[0].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    backgroundBild1();
-                }
-            });
-            jRadioButtons[1].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    backgroundBild2();
-                }
-            });
-            jRadioButtons[2].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    backgroundBild3();
-                }
-            });
-            jRadioButtons[3].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    backgroundBild4();
-                }
-            });
-            jButtonNext.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    switch (getSelectedButton()) {
-                        case 0:
-                            backgroundBild2();
-                            break;
-                        case 1:
-                            backgroundBild3();
-                            break;
-                        case 2:
-                            backgroundBild4();
-                            break;
-                        case 3:
-                            backgroundBild1();
-                            break;
-                    }
-                }
-            });
-            jButtonPrevious.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    switch (getSelectedButton()) {
-                        case 0:
-                            backgroundBild4();
-                            break;
-                        case 1:
-                            backgroundBild1();
-                            break;
-                        case 2:
-                            backgroundBild2();
-                            break;
-                        case 3:
-                            backgroundBild3();
-                            break;
-                    }
-                }
-            });
+//            jRadioButtons[0].addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    backgroundBild1();
+//                }
+//            });
+//            jRadioButtons[1].addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    backgroundBild2();
+//                }
+//            });
+//            jRadioButtons[2].addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    backgroundBild3();
+//                }
+//            });
+//            jRadioButtons[3].addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    backgroundBild4();
+//                }
+//            });
+//            jButtonNext.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    switch (getSelectedButton()) {
+//                        case 0:
+//                            backgroundBild2();
+//                            break;
+//                        case 1:
+//                            backgroundBild3();
+//                            break;
+//                        case 2:
+//                            backgroundBild4();
+//                            break;
+//                        case 3:
+//                            backgroundBild1();
+//                            break;
+//                    }
+//                }
+//            });
+//            jButtonPrevious.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    switch (getSelectedButton()) {
+//                        case 0:
+//                            backgroundBild4();
+//                            break;
+//                        case 1:
+//                            backgroundBild1();
+//                            break;
+//                        case 2:
+//                            backgroundBild2();
+//                            break;
+//                        case 3:
+//                            backgroundBild3();
+//                            break;
+//                    }
+//                }
+//            });
             this.bb.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {
@@ -189,6 +192,58 @@ public class Bildbetrachter extends JFrame {
                     }
                 }
             });
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            for (int i = 0; i < jRadioButtons.length; i++) {
+                switch (getSelectedButton()) {
+                    case 0:
+                        backgroundBild1();
+                        break;
+                    case 1:
+                        backgroundBild2();
+                        break;
+                    case 2:
+                        backgroundBild3();
+                        break;
+                    case 3:
+                        backgroundBild4();
+                        break;
+                }
+            }
+            if (e.getSource() == jButtonNext) {
+                switch (getSelectedButton()) {
+                    case 0:
+                        backgroundBild2();
+                        break;
+                    case 1:
+                        backgroundBild3();
+                        break;
+                    case 2:
+                        backgroundBild4();
+                        break;
+                    case 3:
+                        backgroundBild1();
+                        break;
+                }
+            }
+            if (e.getSource() == jButtonPrevious) {
+                switch (getSelectedButton()) {
+                    case 0:
+                        backgroundBild4();
+                        break;
+                    case 1:
+                        backgroundBild1();
+                        break;
+                    case 2:
+                        backgroundBild2();
+                        break;
+                    case 3:
+                        backgroundBild3();
+                        break;
+                }
+            }
         }
     }
 
