@@ -26,9 +26,9 @@ public class Bildbetrachter extends JFrame {
 
         this.initComponents();
 
-        this.eh = new EventHandling(this);
+        this.eh = new EventHandling();
         this.setVisible(true);
-        eh.windowAskBeforeClose();
+        eh.windowAskBeforeClose(this);
     }
 
 
@@ -70,7 +70,7 @@ public class Bildbetrachter extends JFrame {
             jPanelWest.add(jRadioButtons[i]);
             buttonGroup.add(jRadioButtons[i]);
             icon[i] = new ImageIcon("src/com/sabel/bilder/Bild" + (i + 1) + ".jpg");
-            jRadioButtons[i].addActionListener(new EventHandling(this));
+            jRadioButtons[i].addActionListener(new EventHandling());
         }
 
 
@@ -82,8 +82,8 @@ public class Bildbetrachter extends JFrame {
 
         jButtonPrevious = new JButton("Vorheriges Bild");
         jButtonNext = new JButton("Nächstes Bild");
-        jButtonPrevious.addActionListener(new EventHandling(this));
-        jButtonNext.addActionListener(new EventHandling(this));
+        jButtonPrevious.addActionListener(new EventHandling());
+        jButtonNext.addActionListener(new EventHandling());
 
         jPanelSouth.add(jButtonPrevious);
         jPanelSouth.add(jButtonNext);
@@ -102,10 +102,8 @@ public class Bildbetrachter extends JFrame {
 
     private class EventHandling implements ActionListener {
 
-        Bildbetrachter bb;
 
-        public EventHandling(Bildbetrachter bb) {
-            this.bb = bb;
+        public EventHandling() {
 //            initEvents();
         }
 
@@ -185,8 +183,8 @@ public class Bildbetrachter extends JFrame {
 
         }
 
-        public void windowAskBeforeClose(){
-            this.bb.addWindowListener(new WindowAdapter() {
+        public void windowAskBeforeClose(Bildbetrachter bb){
+            bb.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {
                     if (JOptionPane.showConfirmDialog(bb,
