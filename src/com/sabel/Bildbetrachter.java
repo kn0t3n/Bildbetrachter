@@ -11,7 +11,7 @@ public class Bildbetrachter extends JFrame {
 
     private JRadioButton[] jRadioButtons;
     private JButton jButtonPrevious, jButtonNext;
-    private JPanel jPanelWest, jPanelSouth, jPanelCenter;
+    private JPanel jPanelWest, jPanelSouth;
     private Icon[] icon;
     private ButtonGroup buttonGroup;
     private JLabel jLabel;
@@ -26,7 +26,7 @@ public class Bildbetrachter extends JFrame {
 
         this.initComponents();
 
-        eh = new EventHandling(this);
+        this.eh = new EventHandling(this);
         this.setVisible(true);
     }
 
@@ -178,7 +178,7 @@ public class Bildbetrachter extends JFrame {
                     }
                 }
             });
-            bb.addWindowListener(new WindowAdapter() {
+            this.bb.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {
                     if (JOptionPane.showConfirmDialog(bb,
