@@ -28,6 +28,7 @@ public class Bildbetrachter extends JFrame {
 
         this.eh = new EventHandling(this);
         this.setVisible(true);
+        eh.windowAskBeforeClose();
     }
 
 
@@ -105,7 +106,7 @@ public class Bildbetrachter extends JFrame {
 
         public EventHandling(Bildbetrachter bb) {
             this.bb = bb;
-            initEvents();
+//            initEvents();
         }
 
         private int getSelectedButton() {
@@ -181,6 +182,10 @@ public class Bildbetrachter extends JFrame {
 //                    }
 //                }
 //            });
+
+        }
+
+        public void windowAskBeforeClose(){
             this.bb.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {
