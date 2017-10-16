@@ -64,7 +64,7 @@ public class Bildbetrachter extends JFrame {
         icon = new Icon[4];
         jRadioButtons = new JRadioButton[4];
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < jRadioButtons.length; i++) {
             jRadioButtons[i] = new JRadioButton("Bild " + (i + 1));
             jPanelWest.add(jRadioButtons[i]);
             buttonGroup.add(jRadioButtons[i]);
