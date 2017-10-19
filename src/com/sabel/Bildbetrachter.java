@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+
 public class Bildbetrachter extends JFrame {
 
     private JRadioButton[] jRadioButtons;
@@ -65,16 +66,19 @@ public class Bildbetrachter extends JFrame {
         icon = new ImageIcon[4];
         jRadioButtons = new JRadioButton[4];
 
+//        URL url = getClass().getResource("/bild1.jpg");
+
         for (int i = 0; i < jRadioButtons.length; i++) {
             jRadioButtons[i] = new JRadioButton("Bild " + (i + 1));
             jPanelWest.add(jRadioButtons[i]);
             buttonGroup.add(jRadioButtons[i]);
-            icon[i] = new ImageIcon("src/com/sabel/bilder/Bild" + (i + 1) + ".jpg");
+            icon[i] = new ImageIcon(getClass().getResource("/Bild" + (i + 1) + ".jpg"));
             jRadioButtons[i].addActionListener(new EventHandling());
         }
 
 
         backgroundBild1();
+
 
         jScrollPane = new JScrollPane(jLabel);
 
