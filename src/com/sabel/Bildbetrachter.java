@@ -18,7 +18,7 @@ public class Bildbetrachter extends JFrame {
     private JScrollPane jScrollPane;
     private EventHandling eh;
 
-    public Bildbetrachter() throws HeadlessException {
+    public Bildbetrachter() {
 
         this.setTitle("Bilder");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -62,7 +62,7 @@ public class Bildbetrachter extends JFrame {
 
         buttonGroup = new ButtonGroup();
 
-        icon = new Icon[4];
+        icon = new ImageIcon[4];
         jRadioButtons = new JRadioButton[4];
 
         for (int i = 0; i < jRadioButtons.length; i++) {
@@ -183,11 +183,10 @@ public class Bildbetrachter extends JFrame {
 
         }
 
-        public void windowAskBeforeClose(Bildbetrachter bb){
+        public void windowAskBeforeClose(Bildbetrachter bb) {
             bb.addWindowListener(new WindowAdapter() {
-                @Override
                 public void windowClosing(WindowEvent e) {
-                    if (JOptionPane.showConfirmDialog(bb,
+                    if (JOptionPane.showConfirmDialog(Bildbetrachter.this,
                             "Wollen Sie das Programm wirklich beenden?", "Programm beenden?",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
@@ -197,23 +196,20 @@ public class Bildbetrachter extends JFrame {
             });
         }
 
-        @Override
         public void actionPerformed(ActionEvent e) {
-            for (int i = 0; i < jRadioButtons.length; i++) {
-                switch (getSelectedButton()) {
-                    case 0:
-                        backgroundBild1();
-                        break;
-                    case 1:
-                        backgroundBild2();
-                        break;
-                    case 2:
-                        backgroundBild3();
-                        break;
-                    case 3:
-                        backgroundBild4();
-                        break;
-                }
+            switch (getSelectedButton()) {
+                case 0:
+                    backgroundBild1();
+                    break;
+                case 1:
+                    backgroundBild2();
+                    break;
+                case 2:
+                    backgroundBild3();
+                    break;
+                case 3:
+                    backgroundBild4();
+                    break;
             }
             if (e.getSource() == jButtonNext) {
                 switch (getSelectedButton()) {
