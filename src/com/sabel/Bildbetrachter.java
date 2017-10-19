@@ -18,7 +18,7 @@ public class Bildbetrachter extends JFrame {
     private JScrollPane jScrollPane;
     private EventHandling eh;
 
-    public Bildbetrachter() {
+    public Bildbetrachter() throws HeadlessException {
 
         this.setTitle("Bilder");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -183,10 +183,11 @@ public class Bildbetrachter extends JFrame {
 
         }
 
-        public void windowAskBeforeClose(Bildbetrachter bb) {
+        public void windowAskBeforeClose(final Bildbetrachter bb) {
             bb.addWindowListener(new WindowAdapter() {
+                @Override
                 public void windowClosing(WindowEvent e) {
-                    if (JOptionPane.showConfirmDialog(Bildbetrachter.this,
+                    if (JOptionPane.showConfirmDialog(bb,
                             "Wollen Sie das Programm wirklich beenden?", "Programm beenden?",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
@@ -196,6 +197,7 @@ public class Bildbetrachter extends JFrame {
             });
         }
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             switch (getSelectedButton()) {
                 case 0:
